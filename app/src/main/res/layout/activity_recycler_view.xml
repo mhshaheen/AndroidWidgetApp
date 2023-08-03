@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".recyclerView.RecyclerViewActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vertical_btn"
+        tools:listitem="@layout/rv_item" />
+
+    <Button
+        android:id="@+id/vertical_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vertical"
+        app:layout_constraintBottom_toTopOf="@+id/rv_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/horizontal_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/rv_list"
+        app:layout_constraintStart_toEndOf="@+id/vertical_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/grid_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grid"
+        app:layout_constraintBottom_toTopOf="@+id/rv_list"
+        app:layout_constraintStart_toEndOf="@+id/horizontal_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stragger_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stragger"
+        app:layout_constraintBottom_toTopOf="@+id/rv_list"
+        app:layout_constraintStart_toEndOf="@+id/grid_btn"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
