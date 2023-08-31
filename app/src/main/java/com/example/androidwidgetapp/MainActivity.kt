@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.androidwidgetapp.ads.AdActivity
 import com.example.androidwidgetapp.databinding.ActivityMainBinding
+import com.example.androidwidgetapp.googleBilling.GoogleBillingActivity
 import com.example.androidwidgetapp.interfaces.GenericInterfaceListener
 import com.example.androidwidgetapp.recyclerView.RecyclerViewActivity
-import java.util.Objects
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,8 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         val itemList = listOf(
             "Recycler View",
-            "Recycler View 2",
-            "Recycler View 3",
+            "Google Billing",
+            "Ad",
             "Recycler View 4",
             "Recycler View 5",
             "Recycler View 6",
@@ -62,6 +63,8 @@ class MainActivity : AppCompatActivity() {
     private fun goToDestination(any: String) {
         when(any){
             "Recycler View" -> { startActivity(Intent(this@MainActivity, RecyclerViewActivity::class.java)) }
+            "Google Billing" -> { startActivity(Intent(this@MainActivity, GoogleBillingActivity::class.java)) }
+            "Ad" -> { startActivity(Intent(this@MainActivity, AdActivity::class.java)) }
         }
     }
 }
