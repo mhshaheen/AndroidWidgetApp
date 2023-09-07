@@ -116,6 +116,7 @@ class AdActivity : AppCompatActivity() {
 
     private fun initNativeAd() {
         binding.progressBar.isVisible = true
+        binding.nativeAd.isVisible = true
         adLoader = AdLoader.Builder(this, "ca-app-pub-3940256099942544/2247696110")
             .forNativeAd {
                 binding.progressBar.isVisible = false

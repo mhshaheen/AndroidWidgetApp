@@ -57,15 +57,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/interstitialBtn" />
 
-    <com.google.android.gms.ads.nativead.NativeAdView
+    <com.example.androidwidgetapp.ads.native_template.TemplateView
         android:id="@+id/nativeAd"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:gnt_template_type="@layout/gnt_small_template_view"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nativeBtn"
-        app:layout_constraintVertical_bias=".5"/>
+        app:layout_constraintVertical_bias=".5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
