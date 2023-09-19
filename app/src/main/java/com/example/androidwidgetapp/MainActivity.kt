@@ -10,6 +10,7 @@ import com.example.androidwidgetapp.databinding.ActivityMainBinding
 import com.example.androidwidgetapp.googleBilling.GoogleBillingActivity
 import com.example.androidwidgetapp.interfaces.GenericInterfaceListener
 import com.example.androidwidgetapp.recyclerView.RecyclerViewActivity
+import com.example.androidwidgetapp.recyclerViewViewType.RVViewTypeActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             "Recycler View",
             "Google Billing",
             "Ad",
-            "Recycler View 4",
+            "Recycler View View Type",
             "Recycler View 5",
             "Recycler View 6",
             "Recycler View 7",
@@ -65,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             "Recycler View" -> { startActivity(Intent(this@MainActivity, RecyclerViewActivity::class.java)) }
             "Google Billing" -> { startActivity(Intent(this@MainActivity, GoogleBillingActivity::class.java)) }
             "Ad" -> { startActivity(Intent(this@MainActivity, AdActivity::class.java)) }
+            "Recycler View View Type" -> { startActivity(Intent(this@MainActivity, RVViewTypeActivity::class.java)) }
         }
     }
 }
