@@ -121,6 +121,7 @@ class AdActivity : AppCompatActivity() {
     }
 
     private fun initRewardAd() {
+        binding.progressBar.isVisible = true
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(this, "ca-app-pub-3940256099942544/5224354917", adRequest, object : RewardedAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
@@ -130,7 +131,9 @@ class AdActivity : AppCompatActivity() {
 
             override fun onAdLoaded(ad: RewardedAd) {
                 Log.d(TAG, "Ad was loaded.")
+                binding.progressBar.isVisible = false
                 rewardedAd = ad
+                showAd()
             }
         })
 
@@ -163,7 +166,9 @@ class AdActivity : AppCompatActivity() {
                 Log.d(TAG, "Ad showed fullscreen content.")
             }
         }
+    }
 
+    fun showAd() {
         rewardedAd?.let { ad ->
             ad.show(this, OnUserEarnedRewardListener { rewardItem ->
                 // Handle the reward.
