@@ -11,6 +11,7 @@ import com.example.androidwidgetapp.googleBilling.GoogleBillingActivity
 import com.example.androidwidgetapp.interfaces.GenericInterfaceListener
 import com.example.androidwidgetapp.recyclerView.RecyclerViewActivity
 import com.example.androidwidgetapp.recyclerViewViewType.RVViewTypeActivity
+import com.example.androidwidgetapp.recyclerViewViewType.stickyHeaderType.StickHeaderActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             "Google Billing",
             "Ad",
             "Recycler View View Type",
-            "Recycler View 5",
+            "Recycler View Sticky Header",
             "Recycler View 6",
             "Recycler View 7",
             "Recycler View 8",
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             "Google Billing" -> { startActivity(Intent(this@MainActivity, GoogleBillingActivity::class.java)) }
             "Ad" -> { startActivity(Intent(this@MainActivity, AdActivity::class.java)) }
             "Recycler View View Type" -> { startActivity(Intent(this@MainActivity, RVViewTypeActivity::class.java)) }
+            "Recycler View Sticky Header" -> { startActivity(Intent(this@MainActivity, StickHeaderActivity::class.java)) }
         }
     }
 }
