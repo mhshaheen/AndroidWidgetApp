@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".bottomSheetDialog.BottomSheetDialogActivity">
+
+    <Button
+        android:id="@+id/toastClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Show Toast"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bottomSheetClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bottom Sheet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toastClick" />
+
+    <Button
+        android:id="@+id/alertDialogClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Material Alert Dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetClick" />
+
+    <Button
+        android:id="@+id/snackBarClick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snack Bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alertDialogClick" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

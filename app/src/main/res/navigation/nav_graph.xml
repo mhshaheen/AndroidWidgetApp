@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/recycleFragmentOne">
+
+    <fragment
+        android:id="@+id/recycleFragmentOne"
+        android:name="com.example.androidwidgetapp.recyclerViewDemo.RecycleFragmentOne"
+        android:label="fragment_recycle"
+        tools:layout="@layout/fragment_recycle_one">
+        <action
+            android:id="@+id/action_recycleFragment_to_recycleFragmentTwo"
+            app:destination="@id/recycleFragmentTwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/recycleFragmentTwo"
+        android:name="com.example.androidwidgetapp.recyclerViewDemo.RecycleFragmentTwo"
+        android:label="fragment_recycle_two"
+        tools:layout="@layout/fragment_recycle_two" />
+</navigation>
