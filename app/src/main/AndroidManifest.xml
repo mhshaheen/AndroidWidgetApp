@@ -20,6 +20,9 @@
             android:name=".shortsPlayer.ShortsPlayerActivity"
             android:exported="false" />
         <activity
+            android:name=".media3Player.Media3PlayerActivity"
+            android:exported="false" />
+        <activity
             android:name=".module.ModuleActivity"
             android:exported="false"
             android:theme="@style/Theme.AndroidWidgetApp" />

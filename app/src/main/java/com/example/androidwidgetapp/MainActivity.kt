@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidwidgetapp.ads.AdActivity
 import com.example.androidwidgetapp.bottomSheetDialog.BottomSheetDialogActivity
@@ -11,6 +12,7 @@ import com.example.androidwidgetapp.coroutineScope.CoroutineScopeActivity
 import com.example.androidwidgetapp.databinding.ActivityMainBinding
 import com.example.androidwidgetapp.googleBilling.GoogleBillingActivity
 import com.example.androidwidgetapp.interfaces.GenericInterfaceListener
+import com.example.androidwidgetapp.media3Player.Media3PlayerActivity
 import com.example.androidwidgetapp.module.ModuleActivity
 import com.example.androidwidgetapp.recyclerView.RecyclerViewActivity
 import com.example.androidwidgetapp.recyclerViewDemo.RecyclerViewDemoActivity
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -53,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             "Module",
             //"Recycler View Pagination",
             "Shorts Player",
+            "Media3 Player",
             "Recycler View 13",
             "Recycler View 14",
             "Recycler View 15",
@@ -88,6 +92,7 @@ class MainActivity : AppCompatActivity() {
             "Recycler View Demo" -> { startActivity(Intent(this@MainActivity, RecyclerViewDemoActivity::class.java)) }
             "Module" -> {startActivity(Intent(this@MainActivity, ModuleActivity::class.java))}
             "Shorts Player" -> {startActivity(Intent(this@MainActivity, ShortsPlayerActivity::class.java))}
+            "Media3 Player" -> {startActivity(Intent(this@MainActivity, Media3PlayerActivity::class.java))}
             //"Recycler View Pagination" -> { startActivity(Intent(this@MainActivity, RVPaginationActivity::class.java)) }
         }
     }

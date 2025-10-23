@@ -16,7 +16,7 @@ internal interface DownloadDao {
     suspend fun update(entity: DownloadEntity)
 
     @Query("SELECT * FROM downloads WHERE id = :id")
-    suspend fun find(id: Int): DownloadEntity?
+    suspend fun find(id: Int): DownloadEntity
 
     @Query("DELETE FROM downloads WHERE id = :id")
     suspend fun remove(id: Int)
@@ -31,10 +31,10 @@ internal interface DownloadDao {
     fun getEntityTillTimeFlow(timeMillis: Long): Flow<List<DownloadEntity>>
 
     @Query("SELECT * FROM downloads WHERE id = :id ORDER BY timeQueued ASC")
-    fun getEntityByIdFlow(id: Int): Flow<DownloadEntity?>
+    fun getEntityByIdFlow(id: Int): Flow<DownloadEntity>
 
     @Query("SELECT * FROM downloads WHERE id IN (:ids) ORDER BY timeQueued ASC")
-    fun getAllEntityByIdsFlow(ids: List<Int>): Flow<List<DownloadEntity?>>
+    fun getAllEntityByIdsFlow(ids: List<Int>): Flow<List<DownloadEntity>>
 
     @Query("SELECT * FROM downloads WHERE tag = :tag ORDER BY timeQueued ASC")
     fun getAllEntityByTagFlow(tag: String): Flow<List<DownloadEntity>>
@@ -61,7 +61,7 @@ internal interface DownloadDao {
     suspend fun getAllEntityByTags(tags: List<String>): List<DownloadEntity>
 
     @Query("SELECT * FROM downloads WHERE id IN (:ids) ORDER BY timeQueued ASC")
-    suspend fun getAllEntityByIds(ids: List<Int>): List<DownloadEntity?>
+    suspend fun getAllEntityByIds(ids: List<Int>): List<DownloadEntity>
 
     @Query("SELECT * FROM downloads WHERE status = :status ORDER BY timeQueued ASC")
     suspend fun getAllEntityByStatus(status: String): List<DownloadEntity>
