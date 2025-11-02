@@ -1,11 +1,12 @@
 package com.example.androidwidgetapp.recyclerViewDemo
 
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ItemsViewModel(
-    @SerializedName("image")
+    @SerialName("image")
     val image: Int,
-    @SerializedName("text")
+    @SerialName("text")
     val text: String
-) : Serializable
+)

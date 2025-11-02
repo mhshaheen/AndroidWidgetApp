@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -56,6 +57,8 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
+    implementation(libs.runtime.livedata)
+    implementation(libs.material3)
     ksp(libs.hilt.compiler)
 
     // Lifecycle
@@ -75,8 +78,8 @@ dependencies {
 
     // Retrofit / Gson
     implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.gson)
+    implementation(libs.converter.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
 
     // Navigation
     implementation(libs.navigation.fragment.ktx)
@@ -122,6 +125,11 @@ dependencies {
 
     implementation(libs.kotlin.reflect)
 
+    implementation(libs.converter.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
+
     // Local module
     implementation(project(":ketch"))
+
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
 }

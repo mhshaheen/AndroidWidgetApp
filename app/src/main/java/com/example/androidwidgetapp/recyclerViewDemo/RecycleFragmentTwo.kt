@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.androidwidgetapp.databinding.FragmentRecycleTwoBinding
+import com.example.androidwidgetapp.media3Player.GenericTrack.Companion.safeJson
 
 class RecycleFragmentTwo : Fragment() {
 
@@ -29,7 +30,9 @@ class RecycleFragmentTwo : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        itemsViewModel = arguments?.getSerializable("key") as ItemsViewModel
+        arguments?.let {
+            itemsViewModel = safeJson.decodeFromString<ItemsViewModel>(it.getString("key")?:"")
+        }
 
         init()
     }

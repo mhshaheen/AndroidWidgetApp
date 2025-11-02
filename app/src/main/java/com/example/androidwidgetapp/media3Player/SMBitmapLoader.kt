@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.media3.common.util.BitmapLoader
 import androidx.media3.common.util.UnstableApi
+import com.example.androidwidgetapp.media3Player.coli3.BrightnessTransformation
+import com.example.androidwidgetapp.media3Player.coli3.Coil3ImageLoader
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.example.androidwidgetapp.media3Player
+package com.example.androidwidgetapp.media3Player.coli3
 
 import android.graphics.Bitmap
 import coil3.transform.Transformation

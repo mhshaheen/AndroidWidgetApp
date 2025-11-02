@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidwidgetapp.R
 import com.example.androidwidgetapp.databinding.FragmentRecycleOneBinding
+import com.example.androidwidgetapp.media3Player.GenericTrack.Companion.safeJson
 
 class RecycleFragmentOne : Fragment() {
 
@@ -47,9 +48,9 @@ class RecycleFragmentOne : Fragment() {
 
         customAdapter.itemClickListener = object : (ItemsViewModel) -> Unit {
             override fun invoke(itemsViewModel: ItemsViewModel) {
-                val bundle = Bundle().apply {
-                    putSerializable("key", itemsViewModel)
-                }
+                val bundle = bundleOf(
+                    "key" to safeJson.encodeToString<ItemsViewModel>(itemsViewModel)
+                )
                 findNavController().navigate(R.id.action_recycleFragment_to_recycleFragmentTwo, bundle)
             }
         }

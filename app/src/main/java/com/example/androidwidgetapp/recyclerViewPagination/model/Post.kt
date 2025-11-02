@@ -3,21 +3,22 @@ package com.example.androidwidgetapp.recyclerViewPagination.model
 import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-import java.io.Serializable
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Keep
 @Entity(tableName = "posts")
+@Serializable
 data class Post(
-    @SerializedName("userId")
+    @SerialName("userId")
     val userId: Int,
     @PrimaryKey
-    @SerializedName("id")
+    @SerialName("id")
     val id: Int,
-    @SerializedName("title")
+    @SerialName("title")
     val title: String,
-    @SerializedName("body")
+    @SerialName("body")
     val body: String,
-    @SerializedName("isFav")
+    @SerialName("isFav")
     var isFav: Boolean = false
-): Serializable
+)
