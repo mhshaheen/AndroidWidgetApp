@@ -182,7 +182,7 @@ class GenericMediaService : MediaLibraryService() {
 
     private fun buildPlaceholderNotification(): Notification {
         return NotificationCompat.Builder(this, notificationConfig.channelId)
-            .setContentTitle("Shadhin Music").setContentText("Preparing to play...").setSmallIcon(
+            .setContentTitle("Custom Music").setContentText("Preparing to play...").setSmallIcon(
                 notificationConfig.smallIconRes
                     ?: androidx.media3.session.R.drawable.media3_notification_small_icon
             ).setPriority(NotificationCompat.PRIORITY_LOW).setOnlyAlertOnce(true).build()
