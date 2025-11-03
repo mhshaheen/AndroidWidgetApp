@@ -17,23 +17,25 @@ class UrlInterceptor(
     companion object {
         private const val TAG = "UrlInterceptor"
     }
-    
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val track = getCurrentTrack() ?: return chain.proceed(request)
-        
+
         return try {
+            // Safe to use runBlocking here - OkHttp interceptors run on background threads
             val result = runBlocking { urlResolver.resolveUrl(track) }
-            
+
             result.fold(
                 onSuccess = { resolvedUrl ->
+                    Log.d(TAG, "URL resolved: ${track.title}")
                     val newRequest = request.newBuilder()
                         .url(resolvedUrl)
                         .build()
                     chain.proceed(newRequest)
                 },
                 onFailure = { error ->
-                    Log.e(TAG, "URL resolution failed", error)
+                    Log.e(TAG, "URL resolution failed for ${track.title}", error)
                     createErrorResponse(request, 500, error.message ?: "URL resolution failed")
                 }
             )

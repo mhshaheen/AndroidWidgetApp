@@ -66,11 +66,22 @@ class AnalyticsCollector(
     }
     
     private fun handleMediaItemTransition(player: Player) {
+//        currentSession?.let { session ->
+//            session.end()
+//            val analytics = session.toAnalytics()
+//            customAnalyticsListener?.onAnalyticsEvent(analytics)
+//            Log.d(TAG, "Analytics: ${analytics.track.title} - Played: ${analytics.playedDurationMs}ms")
+//        }
+
         currentSession?.let { session ->
             session.end()
             val analytics = session.toAnalytics()
-            customAnalyticsListener?.onAnalyticsEvent(analytics)
-            Log.d(TAG, "Analytics: ${analytics.track.title} - Played: ${analytics.playedDurationMs}ms")
+            try {
+                customAnalyticsListener?.onAnalyticsEvent(analytics)
+                Log.d(TAG, "Analytics: ${analytics.track.title} - Played: ${analytics.playedDurationMs}ms")
+            } catch (e: Exception) {
+                Log.e(TAG, "Error reporting analytics", e)
+            }
         }
         
         player.currentMediaItem?.toTrack()?.let { track ->

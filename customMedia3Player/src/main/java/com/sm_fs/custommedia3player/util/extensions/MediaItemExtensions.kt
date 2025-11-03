@@ -1,5 +1,6 @@
 package com.sm_fs.custommedia3player.util.extensions
 
+import android.util.Log
 import androidx.core.os.bundleOf
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
@@ -32,9 +33,21 @@ fun Track.toMediaItem(): MediaItem {
         .build()
 }
 
+//fun MediaItem.toTrack(): Track? {
+//    (this.localConfiguration?.tag as? Track)?.let { return it }
+//    return this.mediaMetadata.extras?.getString(TRACK_TAG)?.toTrack()
+//}
+
 fun MediaItem.toTrack(): Track? {
     (this.localConfiguration?.tag as? Track)?.let { return it }
-    return this.mediaMetadata.extras?.getString(TRACK_TAG)?.toTrack()
+
+    val trackJson = this.mediaMetadata.extras?.getString(TRACK_TAG)
+    return try {
+        trackJson?.toTrack()
+    } catch (e: Exception) {
+        Log.e("MediaItemExtensions", "Failed to deserialize track", e)
+        null
+    }
 }
 
 private fun Track.toJsonString(): String {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -118,10 +119,12 @@ data class MyClass(
 
 class MusicPlayerActivity : ComponentActivity() {
 
+    private val viewModel: MusicPlayerViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = MusicPlayerViewModel(application)
+        //val viewModel = MusicPlayerViewModel(application)
 
         setContent {
             MaterialTheme {

@@ -44,12 +44,17 @@ internal class GenericMediaPlayerImpl(
     companion object {
         private const val TAG = "GenericMediaPlayer"
     }
+
+    private var isServiceReady = false
+    private val pendingActions = mutableListOf<() -> Unit>()
     
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     private var service: GenericMediaService? = null
     private var player: Player? = null
     
     private var progressUpdateJob: Job? = null
+
+    private var isBound = false
     
     // State flows
     private val _playerState = MutableStateFlow<PlayerState>(PlayerState.Idle)
@@ -75,7 +80,7 @@ internal class GenericMediaPlayerImpl(
     
     private val _sleepTimerRemaining = MutableStateFlow(0L)
     override val sleepTimerRemaining: StateFlow<Long> = _sleepTimerRemaining.asStateFlow()
-    
+
     private val serviceConnection = MediaServiceConnectionHandler(
         onConnected = { connectedService ->
             service = connectedService
@@ -91,13 +96,28 @@ internal class GenericMediaPlayerImpl(
             updateCurrentTrack()
             onRepeatModeChanged(connectedService.player.repeatMode)
             onShuffleModeEnabledChanged(connectedService.player.shuffleModeEnabled)
+
+            // Execute pending actions
+            isServiceReady = true
+            pendingActions.forEach { it.invoke() }
+            pendingActions.clear()
         },
         onDisconnected = {
             Log.d(TAG, "Service disconnected")
+            isServiceReady = false
             service = null
             player = null
         }
     )
+
+    private fun executeOrQueue(action: () -> Unit) {
+        if (isServiceReady) {
+            action()
+        } else {
+            pendingActions.add(action)
+            Log.d(TAG, "Action queued - service not ready yet")
+        }
+    }
     
     init {
         startService()
@@ -111,19 +131,19 @@ internal class GenericMediaPlayerImpl(
             } else {
                 context.startService(intent)
             }
-            context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
-            Log.d(TAG, "Service start and bind initiated")
+            isBound = context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+            Log.d(TAG, "Service start and bind initiated: $isBound")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to start service", e)
         }
     }
     
     // ========== Playback Control ==========
-    
+
     override fun play() {
-        player?.play()
+        executeOrQueue { player?.play() }
     }
-    
+
     override fun pause() {
         player?.pause()
     }
@@ -160,22 +180,14 @@ internal class GenericMediaPlayerImpl(
     // ========== Queue Management ==========
 
     override fun setPlaylist(tracks: List<Track>, startIndex: Int, startPositionMs: Long) {
-        Log.d(TAG, "=== setPlaylist called ===")
-        Log.d(TAG, "Tracks: ${tracks.size}, startIndex: $startIndex")
-
-        player?.let {
-            val mediaItems = tracks.map { track ->
-                Log.d(TAG, "Converting track: ${track.title}")
-                track.toMediaItem()
+        executeOrQueue {
+            player?.let {
+                val mediaItems = tracks.map { track -> track.toMediaItem() }
+                it.setMediaItems(mediaItems, startIndex, startPositionMs)
+                it.prepare()
+                it.playWhenReady = false
             }
-
-            Log.d(TAG, "MediaItems created: ${mediaItems.size}")
-            it.setMediaItems(mediaItems, startIndex, startPositionMs)
-            it.prepare()
-            Log.d(TAG, "Player prepared")
-            it.playWhenReady = false
-            Log.d(TAG, "Play called")
-        } ?: Log.e(TAG, "Player is null!")
+        }
     }
     
     override fun addToQueue(tracks: List<Track>) {
@@ -326,13 +338,21 @@ internal class GenericMediaPlayerImpl(
             _playlist.value = tracks
         }
     }
-    
+
     private fun startProgressUpdates() {
         progressUpdateJob?.cancel()
         progressUpdateJob = scope.launch {
             while (isActive) {
-                updateProgress()
-                delay(300)
+                player?.let { p ->
+                    if (p.isPlaying) { // Only update when actually playing
+                        _playbackProgress.value = PlaybackProgress(
+                            currentPositionMs = p.currentPosition,
+                            durationMs = p.duration.coerceAtLeast(0L),
+                            bufferedPercentage = p.bufferedPercentage
+                        )
+                    }
+                }
+                delay(300) // 300ms is good for smooth UI updates
             }
         }
     }
@@ -353,12 +373,22 @@ internal class GenericMediaPlayerImpl(
     }
     
     // ========== Lifecycle ==========
-    
+
     override fun release() {
         stopProgressUpdates()
         scope.cancel()
         player?.removeListener(this)
-        context.unbindService(serviceConnection)
+
+        // Only unbind if actually bound
+        if (isBound) {
+            try {
+                context.unbindService(serviceConnection)
+                isBound = false
+            } catch (e: Exception) {
+                Log.e(TAG, "Error unbinding service", e)
+            }
+        }
+
         service = null
         player = null
         Log.d(TAG, "Player released")

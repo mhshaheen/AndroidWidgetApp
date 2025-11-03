@@ -50,6 +50,8 @@ class GenericMediaService : MediaLibraryService() {
     private var playerConfig: PlayerConfiguration = PlayerConfiguration.Builder().build()
     private var notificationConfig: NotificationConfiguration = NotificationConfiguration()
 
+    private var bitmapLoader: CustomBitmapLoader? = null
+
     private var sleepTimer: CountDownTimer? = null
 
     var getCurrentTrack: (() -> Track?)? = null
@@ -208,9 +210,12 @@ class GenericMediaService : MediaLibraryService() {
             sessionIntent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
+        bitmapLoader = CustomBitmapLoader(context)
 
         return MediaLibrarySession.Builder(service, player, callback)
-            .setSessionActivity(pendingIntent).setBitmapLoader(CustomBitmapLoader(context)).build()
+            .setSessionActivity(pendingIntent)
+            .setBitmapLoader(bitmapLoader!!)
+            .build()
     }
 
     fun setSleepTimer(durationMs: Long) {
@@ -236,6 +241,8 @@ class GenericMediaService : MediaLibraryService() {
     }
 
     override fun onDestroy() {
+        bitmapLoader?.release()
+        bitmapLoader = null
         Log.d(TAG, "onDestroy called")
         cancelSleepTimer()
 
