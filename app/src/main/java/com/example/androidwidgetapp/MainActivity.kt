@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidwidgetapp.ads.AdActivity
 import com.example.androidwidgetapp.bottomSheetDialog.BottomSheetDialogActivity
 import com.example.androidwidgetapp.coroutineScope.CoroutineScopeActivity
+import com.example.androidwidgetapp.customMedia3PlayerImplementationDemo.MusicPlayerActivity
 import com.example.androidwidgetapp.databinding.ActivityMainBinding
 import com.example.androidwidgetapp.googleBilling.GoogleBillingActivity
 import com.example.androidwidgetapp.interfaces.GenericInterfaceListener
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             //"Recycler View Pagination",
             "Shorts Player",
             "Media3 Player",
-            "Recycler View 13",
+            "Custom Media3 Player",
             "Recycler View 14",
             "Recycler View 15",
         )
@@ -93,6 +94,7 @@ class MainActivity : AppCompatActivity() {
             "Module" -> {startActivity(Intent(this@MainActivity, ModuleActivity::class.java))}
             "Shorts Player" -> {startActivity(Intent(this@MainActivity, ShortsPlayerActivity::class.java))}
             "Media3 Player" -> {startActivity(Intent(this@MainActivity, Media3PlayerActivity::class.java))}
+            "Custom Media3 Player" -> {startActivity(Intent(this@MainActivity, MusicPlayerActivity::class.java))}
             //"Recycler View Pagination" -> { startActivity(Intent(this@MainActivity, RVPaginationActivity::class.java)) }
         }
     }

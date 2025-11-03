@@ -20,3 +20,4 @@ rootProject.name = "AndroidWidgetApp"
 include(":app")
 //include(":stories")
 include(":ketch")
+include(":customMedia3Player")

@@ -26,17 +26,20 @@
             android:exported="false" />
 
         <!-- YOUR SERVICE DECLARATION -->
-        <service
-            android:name=".media3Player.GenericMediaService"
-            android:enabled="true"
-            android:exported="true"
-            android:foregroundServiceType="mediaPlayback">
-            <intent-filter>
-                <action android:name="androidx.media3.session.MediaLibraryService" />
-                <action android:name="android.media.browse.MediaBrowserService" />
-            </intent-filter>
-        </service>
+<!--        <service-->
+<!--            android:name=".media3Player.GenericMediaService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true"-->
+<!--            android:foregroundServiceType="mediaPlayback">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="androidx.media3.session.MediaLibraryService" />-->
+<!--                <action android:name="android.media.browse.MediaBrowserService" />-->
+<!--            </intent-filter>-->
+<!--        </service>-->
 
+        <activity
+            android:name=".customMedia3PlayerImplementationDemo.MusicPlayerActivity"
+            android:exported="false" />
         <activity
             android:name=".media3Player.Media3PlayerActivity"
             android:exported="false" />

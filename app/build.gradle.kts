@@ -125,11 +125,9 @@ dependencies {
 
     implementation(libs.kotlin.reflect)
 
-    implementation(libs.converter.kotlinx.serialization)
-    implementation(libs.kotlinx.serialization.json)
-
     // Local module
     implementation(project(":ketch"))
+    implementation(project(":customMedia3Player"))
 
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 }
